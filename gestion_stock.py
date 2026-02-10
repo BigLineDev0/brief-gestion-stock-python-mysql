@@ -264,7 +264,7 @@ def afficher_produits():
             else:
                 etat = "En stock"
 
-            print(f"ID: {produit['id']}. {produit['designation']} - {produit['prix']}F - {produit['stock']} - {produit['nom_categorie']} ({etat})")
+            print(f"ID: {produit['id']}. Produit: {produit['designation']} - Prix: {produit['prix']}F - Stock: {produit['stock']} - Catégorie: {produit['nom_categorie']} | Etat: ({etat})")
 
     except Exception as e:
         print("Erreur lors de recuperation de la liste des produits", e)
@@ -499,7 +499,7 @@ def afficher_historiques():
         print("\nListe des historiques :")
         for i, historique in enumerate(historiques, start=1):
 
-            print(f"{i}. {historique['designation']} - {historique['quantite']} - {historique['type_mouvement']} - ({historique['date_mouvement']})")
+            print(f"{i}. Produit: {historique['designation']} - Quantité: {historique['quantite']} - Type: {historique['type_mouvement']} - Date: ({historique['date_mouvement']})")
 
     except Exception as e:
         print("Erreur lors de recuperation de la liste des produits", e)
