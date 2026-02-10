@@ -1,4 +1,5 @@
-from gestion_stock import gestion_categorie, gestion_produit, effectuer_mouvement, alerte_produits, afficher_historiques
+from gestion_stock import gestion_categorie, gestion_produit, effectuer_mouvement, afficher_historiques
+from model.produits import alerte_produits
 # Fonction afficher le menu
 def menu():
 
@@ -24,7 +25,7 @@ def main():
                 gestion_produit()
             
             case '3':
-                effectuer_mouvement
+                effectuer_mouvement()
             
             case '4':
                 alerte_produits()
