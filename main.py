@@ -2,7 +2,7 @@ from gestion_stock import gestion_categorie, gestion_produit, effectuer_mouvemen
 # Fonction afficher le menu
 def menu():
 
-    print("\n----------- GESTION STOCK -------------")
+    print("\n----------- GESTION STOCK  BOUTIQUE PRO -------------")
     print("1. Gestion des catégories")
     print("2. Gestion des produits")
     print("3. Gestion du stock (entrée / sortie)")
