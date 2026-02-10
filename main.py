@@ -1,16 +1,13 @@
-from gestion_stock import ajouter_categorie, afficher_categorie, ajouter_produit, afficher_produits, effectuer_mouvement, alerte_produits, afficher_historiques, supprimer_categorie
+from gestion_stock import gestion_categorie, gestion_produit, effectuer_mouvement, alerte_produits, afficher_historiques
 # Fonction afficher le menu
 def menu():
 
-    print("\n-------- GESTION STOCK --------")
-    print("1. Ajouter une catégorie")
-    print("2. Afficher tous les catégories")
-    print("3. Ajouter un produit")
-    print("4. Afficher tous les produits")
-    print("5. Mouvement de stock")
-    print("6. Afficher les produits en alerte")
-    print("7. Afficher l'historique")
-    print("8. Supprimer une catégorie")
+    print("\n----------- GESTION STOCK -------------")
+    print("1. Gestion des catégories")
+    print("2. Gestion des produits")
+    print("3. Gestion du stock (entrée / sortie)")
+    print("4. Alerte stock faible (< 5)")
+    print("5. Historique des mouvements")
     print("0. Quitter")
     print("-" * 40)
 
@@ -21,28 +18,19 @@ def main():
         choix = input("\nChoisissez une option : ")
         match choix:
             case '1':
-                ajouter_categorie()
+                gestion_categorie()
 
             case '2':
-                afficher_categorie()
+                gestion_produit()
             
             case '3':
-                ajouter_produit()
+                effectuer_mouvement
             
             case '4':
-                afficher_produits()
+                alerte_produits()
             
             case '5':
-                effectuer_mouvement()
-
-            case '6':
-                alerte_produits()
-
-            case '7':
                 afficher_historiques()
-            
-            case '8':
-                supprimer_categorie()
 
             case '0':
                 print("Au revoir!")

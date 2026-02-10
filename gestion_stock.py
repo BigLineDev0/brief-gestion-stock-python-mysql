@@ -61,6 +61,29 @@ def afficher_categorie():
         cursor.close()
         conn.close()
 
+# CRUD Catégoie
+def gestion_categorie():
+    print('\n','-' * 40)
+    print("1. Ajouter une catégorie")
+    print("2. Afficher les catégories")
+    print("3. Supprimer une catégorie")
+    print("0. Accueil")
+    print('-' * 40)
+
+    choix = saisir_choix(['1', '2', '3', '0'])
+    match choix:
+        case '1':
+            ajouter_categorie()
+
+        case '2':
+            afficher_categorie()
+
+        case '3':
+            supprimer_categorie()
+    
+        case '0':
+            afficher_produits()
+
 # Valider la designation pour qu'il soit unique
 def designation_existe(cursor, designation):
     cursor.execute(
@@ -189,6 +212,76 @@ def afficher_produits():
         cursor.close()
         conn.close()
 
+# Supprimer un catégorie
+def supprimer_categorie():
+    conn = get_connection()
+    if conn is None:
+       return
+    
+    while True:
+        afficher_categorie()
+        id_categorie = input("\nChoisissez le numéro de la catégorie à supprimer: ")
+
+        if not id_categorie.isdigit():
+                print("ID invalide")
+                continue
+
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT id FROM categories WHERE id = %s", (id_categorie,))
+
+        if cursor.fetchone():
+            break
+
+        print("Catégorie inexistante")
+
+        try:
+            cursor = conn.cursor()
+
+            cursor.execute("SELECT COUNT(*) FROM produits WHERE id_categorie = %s", (id_categorie),)
+            nbre_produit = cursor.fetchone()[0]
+
+            if nbre_produit > 0:
+                print("\nImpossible de supprimer cette catégorie, des produits y sont associés.")
+            else:
+    
+                cursor.execute("DELETE FROM categories WHERE id = %s", (id_categorie,))
+                conn.commit()
+
+                print("\nCatégorie supprimée avec succès.")
+
+        except Exception as e:
+            print("Erreur de suppression de la catégorie :", e)
+        finally:
+            cursor.close()
+            conn.close()
+
+# Gestion des produits
+def gestion_produit():
+
+    afficher_produits()
+
+    print('\n','-' * 40)
+    print("1. Ajouter un produit")
+    print("2. Modifier un produit")
+    print("3. Supprimer un produit")
+    print("0. Accueil")
+    print('-' * 40)
+
+    choix = saisir_choix(['1', '2', '3', '0'])
+    match choix:
+        case '1':
+            ajouter_produit()
+
+        case '2':
+            print("Non disponible")
+
+        case '3':
+            print("Non disponible")
+    
+        case '0':
+            afficher_produits()
+
+# Effectuer un mouvement
 def effectuer_mouvement():
     print('\n','-' * 40)
     print("1. Entrée stock")
@@ -207,6 +300,7 @@ def effectuer_mouvement():
         case '0':
             afficher_produits()
 
+# Effectuer un entrée de stock
 def entree_stock():
     conn = get_connection()
     if conn is None:
@@ -266,6 +360,7 @@ def entree_stock():
         cursor.close()
         conn.close()
 
+# Effectuer une sortie de stock
 def sortie_stock():
     conn = get_connection()
     if conn is None:
@@ -329,6 +424,7 @@ def sortie_stock():
         cursor.close()
         conn.close()
 
+# Afficher les produits en alerte
 def alerte_produits():
     conn = get_connection()
     if conn is None:
@@ -358,6 +454,7 @@ def alerte_produits():
         cursor.close()
         conn.close()
 
+# Afficher l'historique des mouvements
 def afficher_historiques():
     conn = get_connection()
     if conn is None:
@@ -392,46 +489,3 @@ def afficher_historiques():
     finally:
         cursor.close()
         conn.close()
-
-# Supprimer un catégorie
-def supprimer_categorie():
-    conn = get_connection()
-    if conn is None:
-       return
-    
-    while True:
-        afficher_categorie()
-        id_categorie = input("\nChoisissez le numéro de la catégorie à supprimer: ")
-
-        if not id_categorie.isdigit():
-                print("ID invalide")
-                continue
-
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT id FROM categories WHERE id = %s", (id_categorie,))
-
-        if cursor.fetchone():
-            break
-
-        print("Catégorie inexistante")
-
-        try:
-            cursor = conn.cursor()
-
-            cursor.execute("SELECT COUNT(*) FROM produits WHERE id_categorie = %s", (id_categorie),)
-            nbre_produit = cursor.fetchone()[0]
-
-            if nbre_produit > 0:
-                print("\nImpossible de supprimer cette catégorie, des produits y sont associés.")
-            else:
-    
-                cursor.execute("DELETE FROM categories WHERE id = %s", (id_categorie,))
-                conn.commit()
-
-                print("\nCatégorie supprimée avec succès.")
-
-        except Exception as e:
-            print("Erreur de suppression de la catégorie :", e)
-        finally:
-            cursor.close()
-            conn.close()
