@@ -1,5 +1,5 @@
 from gestion_stock import gestion_categorie, gestion_produit, effectuer_mouvement, afficher_historiques
-from model.utilisateur import Ajouter_utilisateur,utilisateur_connecter,mot_de_pass_hash,afficher_utilisateur
+from model.utilisateur import Ajouter_utilisateur,utilisateur_connecter,mot_de_pass_hash,afficher_utilisateur,inscription
 from model.produits import alerte_produits
 from model.categories import afficher_categorie
 from model.produits import afficher_produits
@@ -94,8 +94,16 @@ def User():
             case _:
                 print("\nOption invalide, veuillez réessayer.")
 
+def Inscription_utilisateur():
+    print('----------------------------INSCRIPTION-----------------------------')
+    print()
+    i=inscription()
+    if i == True:
+        connexion()
 
-def main():
+
+
+def connexion():
     print('----------------Connexion----------------------')
     print()
     while True:
@@ -128,6 +136,18 @@ def main():
             else:
                 print("Mot de passe incorrect")
             
-            
+def main():
+    while True:
+        print("1: S'INSCRIRE")
+        print("2: SE CONNECTER")
+        print()
+        choix=input('Faites votre choix')
+        match choix:
+            case '1':
+                Inscription_utilisateur()
+            case '2':
+                return connexion()   
+            case _:
+                print('choix invalide')        
 main()
 

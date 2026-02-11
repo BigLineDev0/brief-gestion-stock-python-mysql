@@ -14,6 +14,55 @@ def creer_utilisateur(nom,prenom,telephone,email,mot_de_pass,role):
         curseur.close()
         conn.close()
 
+def inscription():
+    conn=get_connection()
+    curseur=conn.cursor()
+    while True:
+        nom=input('saisir le nom')
+        if nom.isnumeric():
+            print('nom doit etre une chaine')
+        else:
+            break
+    while True:
+        prenom=input('saisir le prenom')
+        if prenom.isnumeric():
+            print('prenom doit etre une chaine')
+        else:
+            break
+    while True:
+        telephone=input('saisir le numero de telephone')
+        if (not telephone.isnumeric()  or len(telephone) != 9 or telephone[:2] not in ["77", "78", "70", "71", "76","75"]): 
+            print('saisi invalide')
+        else:
+            break
+    while True:
+            email=input("saisir l'email")
+            if "@" in email and "." in email and " " not in email:
+                break
+            else:
+                print("Le mail saisi n'est pas valide")
+    while True:
+        mdp=input('saisir le mot de pass')
+        if len(mdp)<8:
+            print('le mot de pass doit contenir 8 caracteres')
+        else:
+            # convertir en bytes
+            mot_de_passe_bytes = mdp.encode('utf-8')
+
+            # hachage
+            hash = bcrypt.hashpw(mot_de_passe_bytes, bcrypt.gensalt())
+            break
+    try:
+        sql='insert into utilisateurs(nom,prenom,telephone,email,mot_de_pass)values(%s,%s,%s,%s,%s)'
+        curseur.execute(sql,(nom,prenom,telephone,email,hash))
+        conn.commit()
+        return True
+    except Exception as e:
+        print("erreur lors de l'inscription ",e)
+    finally:
+        curseur.close()
+        conn.close()
+
 def Ajouter_utilisateur():
     while True:
         nom=input('saisir le nom')
