@@ -3,7 +3,7 @@ from model.produits import alerte_produits
 # Fonction afficher le menu
 def menu():
 
-    print("\n----------- GESTION STOCK  BOUTIQUE PRO -------------")
+    print("\n-------- GESTION STOCK --------")
     print("1. Gestion des catégories")
     print("2. Gestion des produits")
     print("3. Gestion du stock (entrée / sortie)")
@@ -25,14 +25,20 @@ def main():
                 gestion_produit()
             
             case '3':
-                effectuer_mouvement()
+                effectuer_mouvement
             
             case '4':
                 alerte_produits()
             
             case '5':
-                afficher_historiques()
+                effectuer_mouvement()
 
+            case '6':
+                alerte_produits()
+
+            case '7':
+                afficher_historiques()
+            
             case '0':
                 print("Au revoir!")
                 break 

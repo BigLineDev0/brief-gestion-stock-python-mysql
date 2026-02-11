@@ -1,7 +1,13 @@
 from db import get_connection
 from model.categories import afficher_categorie
+
 # Valider la designation pour qu'il soit unique
-def designation_existe(cursor, designation):
+def designation_existe(designation):
+    conn = get_connection()
+    if conn is None:
+        return
+    
+    cursor = conn.cursor()
     cursor.execute(
         "SELECT id FROM produits WHERE designation = %s",
         (designation,)
@@ -24,6 +30,10 @@ def ajouter_produit():
     
         if designation.isdigit():
             print("La désignation ne peut pas contenir uniquement des chiffres")
+            continue
+
+        if designation_existe(designation):
+            print("Ce produit existe deja.")
             continue
 
         designation = designation.title()  
