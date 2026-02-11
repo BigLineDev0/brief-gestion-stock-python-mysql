@@ -1,4 +1,4 @@
-#!/home/aliou-diallo/Bureau/Python/gestion-stock/.env/bin/python3
+#!/home/mamesayelom/Documents/composant_accee_au_donner_python/brief-gestion-stock-python-mysql/.env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
