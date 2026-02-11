@@ -108,7 +108,7 @@ def connexion():
     print()
     while True:
         while True:
-            email=input('veuillez saisir votre email ')
+            email=input('veuillez saisir votre email : ')
             if "@" in email and "." in email and " " not in email:
                 break
             else:
@@ -138,15 +138,22 @@ def connexion():
             
 def main():
     while True:
-        print("1: S'INSCRIRE")
-        print("2: SE CONNECTER")
-        print()
-        choix=input('Faites votre choix')
+        print("\n" + "-" * 40)
+        print("      GESTION DE STOCK")
+        print("-" * 40)
+        print("1. Se connecter")
+        print("2. S'inscrire")
+        print("0. Quitter")
+        print("-" * 40)
+        choix=input('Faites votre choix : ')
         match choix:
             case '1':
-                Inscription_utilisateur()
+                return connexion() 
             case '2':
-                return connexion()   
+                Inscription_utilisateur()
+            case '0':
+                print('Au revoir')  
+                break
             case _:
                 print('choix invalide')        
 main()

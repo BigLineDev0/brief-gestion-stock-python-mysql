@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/mamesayelom/Documents/composant_accee_au_donner_python/brief-gestion-stock-python-mysql/.env
+set -gx VIRTUAL_ENV /home/aliou-diallo/Bureau/Python/gestion-stock/.env
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
