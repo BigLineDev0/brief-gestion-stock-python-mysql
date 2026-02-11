@@ -9,6 +9,19 @@ def saisir_choix(options):
         else:
             print("Option invalide.")
 
+# Valider la catégorie pour qu'il soit unique
+def categorie_existe(nom_categorie):
+    conn = get_connection()
+    if conn is None:
+        return
+    
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT id FROM categories WHERE nom_categorie = %s",
+        (nom_categorie,)
+    )
+    return cursor.fetchone() is not None 
+
 # Ajouter une catégorie
 def ajouter_categorie():
     conn = get_connection()
@@ -25,6 +38,12 @@ def ajouter_categorie():
         if nom_categorie.isdigit():
             print("La catégorie ne peut pas contenir uniquement des chiffres")
             continue
+
+        if categorie_existe(nom_categorie):
+            print("Cette catégorie existe deja.")
+            continue
+
+        nom_categorie = nom_categorie.title()  
        
         break
        

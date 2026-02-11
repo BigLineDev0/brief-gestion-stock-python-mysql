@@ -7,7 +7,7 @@ import bcrypt
 # Fonction afficher le menu
 def menu_admin():
 
-    print("\n----------- GESTION STOCK  BOUTIQUE PRO -------------")
+    print("\n-------- GESTION STOCK --------")
     print("1. Gestion des catégories")
     print("2. Gestion des produits")
     print("3. Gestion du stock (entrée / sortie)")
@@ -47,6 +47,7 @@ def Admin():
                 alerte_produits()
             
             case '5':
+
                 afficher_historiques()
             
             case '6':
@@ -55,6 +56,12 @@ def Admin():
             case '7':
                 afficher_utilisateur()
 
+            case '6':
+                alerte_produits()
+
+            case '7':
+                afficher_historiques()
+            
             case '0':
                 print("Au revoir!")
                 break 

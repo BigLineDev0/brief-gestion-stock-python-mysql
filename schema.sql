@@ -42,6 +42,10 @@ CREATE TABLE utilisateurs (
     role ENUM('admin', 'user') DEFAULT 'user'
 );
 
+INSERT INTO utilisateurs(prenom, nom, email, password, role) VALUES
+("Aliou", "DIALLO", "aliou@gmail.com", "Passer@123", "admin"),
+("Mame Saye", "LOM", "mamesaye@gmail.com", "User@123", "user");
+
 -- Affichage produit et de leur catégorie
 SELECT 
     p.designation,
@@ -61,4 +65,6 @@ SELECT
 FROM mouvements m
 JOIN produits p ON m.id_produit = p.id
 ORDER BY m.date_mouvement DESC;
+
+
     
